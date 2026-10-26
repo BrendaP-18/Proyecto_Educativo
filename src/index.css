@@ -1,0 +1,328 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Burgundy / Wine Color Palette */
+  --wine-900: #3b0813;
+  --wine-800: #540c1b;
+  --wine-700: #6b1124;
+  --wine-600: #85162e;
+  --wine-500: #a11d3b;
+  --wine-400: #c42b4e;
+  --wine-300: #e04a6f;
+  --wine-200: #f28da5;
+  --wine-100: #fbd6e0;
+  --wine-50:  #fff0f4;
+
+  --wine-gradient: linear-gradient(135deg, #540c1b 0%, #85162e 50%, #a11d3b 100%);
+  --wine-gradient-hover: linear-gradient(135deg, #6b1124 0%, #a11d3b 50%, #c42b4e 100%);
+  --wine-gradient-subtle: linear-gradient(135deg, rgba(84, 12, 27, 0.04) 0%, rgba(161, 29, 59, 0.08) 100%);
+  --wine-glow: 0 10px 30px -5px rgba(133, 22, 46, 0.35);
+
+  --gold-500: #d99b26;
+  --gold-400: #f3b236;
+
+  /* Theme Colors */
+  --bg-main: #f8f6f7;
+  --bg-card: #ffffff;
+  --text-primary: #1f1416;
+  --text-secondary: #5e4f53;
+  --text-muted: #8c7b80;
+  --border-color: #ebdbe0;
+  --input-bg: #fcf9fa;
+  --shadow-sm: 0 2px 8px rgba(59, 8, 19, 0.04);
+  --shadow-md: 0 8px 24px rgba(59, 8, 19, 0.08);
+  --shadow-lg: 0 20px 40px rgba(59, 8, 19, 0.12);
+}
+
+.dark-mode {
+  --bg-main: #12090b;
+  --bg-card: #1c0f13;
+  --text-primary: #fdf8f9;
+  --text-secondary: #d8c2c7;
+  --text-muted: #9e858b;
+  --border-color: #3b1d25;
+  --input-bg: #27141a;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--wine-400);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--wine-600);
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.animate-float-slow {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-fast {
+  animation: float 3.5s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+/* Glassmorphism helpers */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(235, 219, 224, 0.6);
+}
+
+.dark-mode .glass-panel {
+  background: rgba(28, 15, 19, 0.85);
+  border: 1px solid rgba(59, 29, 37, 0.6);
+}
+
+.glass-badge {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* Wine Button styling */
+.btn-wine {
+  background: var(--wine-gradient);
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 0.85rem 1.75rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--wine-glow);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-wine:hover {
+  background: var(--wine-gradient-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px -4px rgba(133, 22, 46, 0.45);
+}
+
+.btn-wine:active {
+  transform: translateY(0);
+}
+
+/* Secondary outline button */
+.btn-outline-wine {
+  background: transparent;
+  color: var(--wine-600);
+  border: 2px solid var(--wine-500);
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dark-mode .btn-outline-wine {
+  color: var(--wine-200);
+  border-color: var(--wine-400);
+}
+
+.btn-outline-wine:hover {
+  background: var(--wine-50);
+  color: var(--wine-700);
+  border-color: var(--wine-600);
+}
+
+.dark-mode .btn-outline-wine:hover {
+  background: rgba(161, 29, 59, 0.2);
+  color: #ffffff;
+}
+
+/* Input Fields */
+.input-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.input-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+  pointer-events: none;
+}
+
+.custom-input {
+  width: 100%;
+  padding: 0.8rem 1rem 0.8rem 2.75rem;
+  border-radius: 12px;
+  border: 1.5px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.custom-input:focus {
+  border-color: var(--wine-500);
+  box-shadow: 0 0 0 4px rgba(161, 29, 59, 0.15);
+  background-color: var(--bg-card);
+}
+
+.custom-input:focus + .input-icon,
+.input-wrapper:focus-within .input-icon {
+  color: var(--wine-500);
+}
+
+.toggle-password-btn {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-password-btn:hover {
+  color: var(--wine-600);
+}
+
+/* --- ESTILOS INSTITUCIONALES EDUCATIVOS (TEMA VERDE DE LAS IMÁGENES DE REFERENCIA) --- */
+:root {
+  --primary-green: #235347;
+  --primary-green-dark: #1b4238;
+  --primary-green-light: #2e685a;
+  --primary-green-soft: #eaf3f0;
+  --primary-green-border: #c2dcd4;
+}
+
+.bg-institutional-dark {
+  background-color: #235347;
+}
+
+.text-institutional-dark {
+  color: #235347;
+}
+
+.btn-institutional {
+  background-color: #235347;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.85rem 1.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-institutional:hover {
+  background-color: #1b4238;
+  box-shadow: 0 4px 14px rgba(35, 83, 71, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-institutional:active {
+  transform: translateY(0);
+}
+
+.input-institutional {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.6rem;
+  border-radius: 10px;
+  border: 1.5px solid #d1d5db;
+  background-color: #ffffff;
+  color: #1f2937;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.input-institutional:focus {
+  border-color: #235347;
+  box-shadow: 0 0 0 3px rgba(35, 83, 71, 0.15);
+}
+
+.input-institutional-noicon {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1.5px solid #d1d5db;
+  background-color: #ffffff;
+  color: #1f2937;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.input-institutional-noicon:focus {
+  border-color: #235347;
+  box-shadow: 0 0 0 3px rgba(35, 83, 71, 0.15);
+}
+
