@@ -140,3 +140,44 @@ export const solicitudesService = {
   }
 };
 
+/**
+ * Servicio del Portal del Docente
+ */
+export const docenteService = {
+  // Obtener datos del dashboard docente (métricas, grupos, materias, alumnos en riesgo)
+  async getDashboard(idUsuario) {
+    return await apiRequest(`/docentes/dashboard?id_usuario=${idUsuario}`);
+  },
+
+  // Obtener lista de asistencia por grupo y fecha
+  async getAsistencia(idGrupo, fecha) {
+    const query = new URLSearchParams({ id_grupo: idGrupo, ...(fecha ? { fecha } : {}) }).toString();
+    return await apiRequest(`/docentes/asistencia?${query}`);
+  },
+
+  // Guardar pase de lista de asistencia
+  async guardarAsistencia(data) {
+    return await apiRequest('/docentes/asistencia', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+
+  // Obtener calificaciones por grupo, materia y periodo
+  async getCalificaciones(idGrupo, idMateria, periodo) {
+    const query = new URLSearchParams({ 
+      id_grupo: idGrupo, 
+      id_materia: idMateria, 
+      ...(periodo ? { periodo } : {}) 
+    }).toString();
+    return await apiRequest(`/docentes/calificaciones?${query}`);
+  },
+
+  // Guardar calificaciones en BD
+  async guardarCalificaciones(data) {
+    return await apiRequest('/docentes/calificaciones', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+};

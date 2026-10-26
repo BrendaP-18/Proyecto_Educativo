@@ -6,6 +6,7 @@ import SolicitudExitosaModal from './modules/auth/SolicitudExitosaModal';
 import EduIllustration from './components/EduIllustration';
 import AdminGeneralView from './modules/dashboard/AdminGeneralView';
 import DashboardView from './modules/dashboard/DashboardView';
+import DocentePortalView from './modules/dashboard/DocentePortalView';
 import { authService } from './services/api';
 
 export default function App() {
@@ -42,6 +43,9 @@ export default function App() {
     const role = (userSession.user.role || '').toLowerCase();
     if (role === 'administrador') {
       return <AdminGeneralView userSession={userSession} onLogout={handleLogout} />;
+    }
+    if (role === 'docente' || role === 'profesor') {
+      return <DocentePortalView userSession={userSession} onLogout={handleLogout} />;
     }
     return <DashboardView userSession={userSession} onLogout={handleLogout} />;
   }
